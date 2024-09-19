@@ -1,0 +1,24 @@
+---
+- hosts: web-nginx-1, web-nginx-2
+  become: yes
+  gather_facts: true
+  tasks:
+
+  - name: Get Filebeat
+    ansible.builtin.get_url:
+      url: https://mirror.yandex.ru/mirrors/elastic/7/pool/main/f/filebeat/filebeat-7.17.13-amd64.deb
+      dest: /home/admin/
+
+  - name: install filebeat
+    apt:
+      deb: /home/admin/filebeat-7.17.13-amd64.deb
+
+  - name: copy filebeat config file
+    copy:
+      src: ./static/filebeat.yml
+      dest: /etc/filebeat/filebeat.yml
+
+  - name: Make sure a service is running
+    systemd:
+      state: started
+      name: filebeat

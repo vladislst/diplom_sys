@@ -1,0 +1,5 @@
+/terraform/key.json
+/terraform/.terraform
+/terraform/.terraform.lock.hcl
+/terraform/meta.txt
+/.vscode/

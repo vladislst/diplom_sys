@@ -1,0 +1,40 @@
+---
+- name: Install and configure Zabbix Agent
+  hosts: bastion, web-nginx-1, web-nginx-2, elasticsearch, kibana
+  become: yes
+
+  tasks:
+  
+  - name: Repo
+    get_url:
+      url: 'https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-5+debian12_all.deb'
+      dest: '~/zabbix-release_6.0-5+debian12_all.deb'
+
+  - name: Dpkg zabbix
+    apt:  
+      deb: '~/zabbix-release_6.0-5+debian12_all.deb'
+      allow_downgrade: yes  
+
+  - name: Update 
+    apt:
+      update_cache: yes
+      
+  - name: Install zabbix-agent
+    apt:  
+      name: zabbix-agent
+      state: present
+      
+  - name: Stop zabbix-agent
+    service:
+      name: zabbix-agent.service
+      state: stopped
+      
+  - name: Configure Zabbix Agent
+    template:
+      src: ./static/zabbix_agentd.conf.j2
+      dest: /etc/zabbix/zabbix_agentd.conf  
+
+  - name: Start zabbix-agent
+    service:
+      name: zabbix-agent.service
+      state: started
