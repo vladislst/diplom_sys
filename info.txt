@@ -1,0 +1,6 @@
+Zabbix-server
+
+Сайт : http://89.169.158.80/zabbix/
+Логин : Admin
+Пароль : zabbix
+
