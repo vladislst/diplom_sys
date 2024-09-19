@@ -1,6 +1,8 @@
 # Дипломная работа по профессии «Системный администратор» - Степанов Владислав
   
 Задание:[Дипломная работа](https://github.com/netology-code/sys-diplom/tree/diplom-zabbix?tab=readme-ov-file#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B)
+
+Доступы и адреса:[info.txt](./info.txt)
   
 ## Инфраструктура
 
